@@ -19,23 +19,10 @@
 body{
     background-color: rgb(39, 4, 77);
 }
-.background{
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-}
-.background .shape{
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-}
+
 
 form{
-    height: 600px;
+    height: 700px;
     width: 450px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
@@ -46,7 +33,7 @@ form{
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
+    padding: 5px 35px;
 }
 form *{
     font-family: 'Poppins',sans-serif;
@@ -79,9 +66,7 @@ input{
     font-size: 14px;
     font-weight: 300;
 }
-::placeholder{
-    color: #e5e5e5;
-}
+
 button{
     margin-top: 14px;
     width: 100%;
@@ -93,28 +78,15 @@ button{
     border-radius: 5px;
     cursor: pointer;
 }
-.social{
-  margin-top: 30px;
-  display: flex;
+
+option{
+    color: #000;
 }
-.social div{
-  background: rgb(55, 0, 255);
-  width: 150px;
-  border-radius: 3px;
-  padding: 5px 10px 10px 5px;
-  background-color: rgba(255,255,255,0.27);
-  color: #eaf0fb;
-  text-align: center;
+select{
+    color: #000;
+    width: 100px;
 }
-.social div:hover{
-  background-color: rgba(255,255,255,0.47);
-}
-.social .fb{
-  margin-left: 25px;
-}
-.social i{
-  margin-right: 4px;
-}
+
 
     </style>
 </head>
@@ -126,22 +98,59 @@ button{
     <form action="" method="post">
         {% csrf_token %} 
         <h3>Signup Here</h3>
+        <form action="#" method="post">
+            <div class="form-group">
+              <label for="signupType">Login as:</label>
+              <select id="signupType" onchange="showFields(this.value)">
+                <option value="student">Student</option>
+                <option value="alumni">Alumni</option>
+                <option value="faculty">Faculty</option>
+              </select>
+            </div>
 
-        <label for="username">Username</label>
+        <label for="username">Name</label>
         <input type="text" placeholder="Username" name="username" id="username" required>
 
-        <label for="email">Email</label>
-        <input type="email" placeholder="Email or Phone" name="email" id="email">
+        <label for="email">Gsuite-Email</label>
+        <input type="email" placeholder="Email or Phone" name="email" id="email" required>
+
+        <label for="studentID">Student ID</label>
+        <input type="text" placeholder="Student ID" id="studentID" name="studentID" required>
 
         <label for="password1">Password</label>
-        <input type="password" placeholder="Password" id="password1" name="password1">
+        <input type="password" placeholder="Password" id="password1" name="password1" required>
 
 
         <label for="password2">Confirm Password</label>
-        <input type="password" placeholder="Confirm Password" id="password2" name="password2">
+        <input type="password" placeholder="Confirm Password" id="password2" name="password2" required>
         <button type="submit">Signup</button>
         
-        <a href="#" >i have already account</a>
+        <a href="\login" >Already have account? Log In</a>
     </form>
+    <script>
+        function showFields(signupType) {
+          var fieldGroup2 = document.getElementById("fieldGroup2");
+          var fieldLabel2 = document.getElementById("fieldLabel2");
+          var fieldLabel3 = document.getElementById("fieldLabel3");
+          
+          if (signupType === "student") {
+            fieldLabel1.innerText = "Student ID:";
+            fieldLabel2.innerText = "Email:";
+            fieldGroup2.style.display = "block";
+            fieldLabel3.innerText = "Password:";
+          } else if (signupType === "alumni") {
+            fieldLabel1.innerText = "Student ID:";
+            fieldLabel2.innerText = "Password:";
+            fieldGroup2.style.display = "none";
+            fieldLabel3.innerText = "Alumni Password:";
+          } else if (signupType === "faculty") {
+            fieldLabel1.innerText = "Email:";
+            fieldLabel2.innerText = "Password:";
+            fieldGroup2.style.display = "none";
+            fieldLabel3.innerText = "Faculty Password:";
+          }
+        }
+        
+      </script>
 </body>
 </html>
