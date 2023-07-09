@@ -22,7 +22,7 @@ body{
 
 
 form{
-    height: 700px;
+    height: 710px;
     width: 450px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
@@ -44,6 +44,8 @@ form *{
 }
 form h3{
     font-size: 32px;
+    margin-top: 20px;
+    margin-bottom: 10px;
     font-weight: 500;
     line-height: 42px;
     text-align: center;
@@ -72,7 +74,7 @@ button{
     width: 100%;
     background-color: #ffffff;
     color: #080710;
-    padding: 15px 0;
+    padding: 5px 0;
     font-size: 18px;
     font-weight: 600;
     border-radius: 5px;
@@ -97,60 +99,50 @@ select{
     </div>
     <form action="" method="post">
         {% csrf_token %} 
-        <h3>Signup Here</h3>
-        <form action="#" method="post">
+        <h3>Sign Up</h3>
+        <form action="#" method="post" id="signupForm">
             <div class="form-group">
-              <label for="signupType">Login as:</label>
+              <label for="signupType">Signup as:</label>
               <select id="signupType" onchange="showFields(this.value)">
                 <option value="student">Student</option>
                 <option value="alumni">Alumni</option>
                 <option value="faculty">Faculty</option>
               </select>
             </div>
-
-        <label for="username">Name</label>
-        <input type="text" placeholder="Username" name="username" id="username" required>
-
-        <label for="email">Gsuite-Email</label>
-        <input type="email" placeholder="Email or Phone" name="email" id="email" required>
-
-        <label for="studentID">Student ID</label>
-        <input type="text" placeholder="Student ID" id="studentID" name="studentID" required>
-
-        <label for="password1">Password</label>
-        <input type="password" placeholder="Password" id="password1" name="password1" required>
-
-
-        <label for="password2">Confirm Password</label>
-        <input type="password" placeholder="Confirm Password" id="password2" name="password2" required>
-        <button type="submit">Signup</button>
-        
-        <a href="\login" >Already have account? Log In</a>
-    </form>
-    <script>
-        function showFields(signupType) {
-          var fieldGroup2 = document.getElementById("fieldGroup2");
-          var fieldLabel2 = document.getElementById("fieldLabel2");
-          var fieldLabel3 = document.getElementById("fieldLabel3");
           
-          if (signupType === "student") {
-            fieldLabel1.innerText = "Student ID:";
-            fieldLabel2.innerText = "Email:";
-            fieldGroup2.style.display = "block";
-            fieldLabel3.innerText = "Password:";
-          } else if (signupType === "alumni") {
-            fieldLabel1.innerText = "Student ID:";
-            fieldLabel2.innerText = "Password:";
-            fieldGroup2.style.display = "none";
-            fieldLabel3.innerText = "Alumni Password:";
-          } else if (signupType === "faculty") {
-            fieldLabel1.innerText = "Email:";
-            fieldLabel2.innerText = "Password:";
-            fieldGroup2.style.display = "none";
-            fieldLabel3.innerText = "Faculty Password:";
-          }
-        }
-        
-      </script>
+            <label for="username">Name</label>
+            <input type="text" placeholder="Username" name="username" id="username" required>
+          
+            <label for="email">Gsuite-Email</label>
+            <input type="email" placeholder="Email or Phone" name="email" id="email" required>
+          
+            <div id="studentIDField">
+              <label for="studentID">Student ID</label>
+              <input type="text" placeholder="Student ID" id="studentID" name="studentID" required>
+            </div>
+          
+            <label for="password1">Password</label>
+            <input type="password" placeholder="Password" id="password1" name="password1" required>
+          
+            <label for="password2">Confirm Password</label>
+            <input type="password" placeholder="Confirm Password" id="password2" name="password2" required>
+            
+            <button type="submit">Signup</button>
+            
+            <a href="\login">Already have an account? Log In</a>
+          </form>
+          
+          <script>
+            function showFields(value) {
+              const studentIDField = document.getElementById('studentIDField');
+              
+              if (value === 'faculty') {
+                studentIDField.style.display = 'none';
+              } else {
+                studentIDField.style.display = 'block';
+              }
+            }
+          </script>
+          
 </body>
 </html>
