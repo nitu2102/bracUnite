@@ -93,19 +93,8 @@
   <div class="container">
     <h2>Log In</h2>
     <form action="#" method="post">
-      <div class="form-group">
-        <label for="loginType">Login as:</label>
-        <select id="loginType" onchange="showFields(this.value)">
-          <option value="student">Student</option>
-          <option value="alumni">Alumni</option>
-          <option value="faculty">Faculty</option>
-        </select>
-      </div>
       
-      <div class="form-group">
-        <label id="fieldLabel1" for="field1">Student ID:</label>
-        <input type="text" id="field1" required>
-      </div>
+      
       
       <div class="form-group" id="fieldGroup2">
         <label id="fieldLabel2" for="field2">Email:</label>
@@ -119,35 +108,11 @@
       
       <div class="form-group">
         <input type="submit" value="Log In">
-        <a href="#" >Already have account? Log In</a>
+        <a href="\signup" >Already have account? Log In</a>
       </div>
     </form>
   </div>
   
-  <script>
-    function showFields(loginType) {
-      var fieldGroup2 = document.getElementById("fieldGroup2");
-      var fieldLabel2 = document.getElementById("fieldLabel2");
-      var fieldLabel3 = document.getElementById("fieldLabel3");
-      
-      if (loginType === "student") {
-        fieldLabel1.innerText = "Student ID:";
-        fieldLabel2.innerText = "Email:";
-        fieldGroup2.style.display = "block";
-        fieldLabel3.innerText = "Password:";
-      } else if (loginType === "alumni") {
-        fieldLabel1.innerText = "Student ID:";
-        fieldLabel2.innerText = "Password:";
-        fieldGroup2.style.display = "none";
-        fieldLabel3.innerText = "Alumni Password:";
-      } else if (loginType === "faculty") {
-        fieldLabel1.innerText = "Email:";
-        fieldLabel2.innerText = "Password:";
-        fieldGroup2.style.display = "none";
-        fieldLabel3.innerText = "Faculty Password:";
-      }
-    }
-    
-  </script>
+
 </body>
 </html>
