@@ -57,13 +57,13 @@ def faculty(request):
 
 def Handle_login(request):
     storage = messages.get_messages(request)
-    storage.used = True
+    storage.used = True   #clear error msg
 
     if request.method=="POST":
         username = request.POST['email']
         userpassword = request.POST['password1']
 
-        myuser = authenticate(username=username, password=userpassword)
+        myuser = authenticate(username=username, password=userpassword) #username and password match test
 
         if myuser is not None:
             login(request,myuser)
@@ -77,6 +77,7 @@ def Handle_login(request):
 
 
 def Handle_signup(request):
+    #to clear multiple error message
     storage = messages.get_messages(request)
     storage.used = True
 
@@ -89,7 +90,7 @@ def Handle_signup(request):
             return render(request, 'signup.html')
 
         try:
-            if User.objects.get(username=email):
+            if User.objects.get(username=email): #i have used email as username
                 messages.warning(request, "Email is taken!")
                 return render(request, 'signup.html')
 
@@ -97,7 +98,7 @@ def Handle_signup(request):
             pass
 
         #username email and password
-        user = User.objects.create_user(email, email, password)
+        user = User.objects.create_user(email, email, password) #username=email,email,password
         user.is_active = False
         user.save()
         current_site = get_current_site(request)
@@ -105,16 +106,14 @@ def Handle_signup(request):
         message = render_to_string('activate.html',{
             'user':user,
             'domain':'127.0.0.1:8000',
-            'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+            'uid':urlsafe_base64_encode(force_bytes(user.pk)), #pk=primary key
             'token': generate_token.make_token(user)
         })
 
-        email_message = EmailMessage(email_subject, message,settings.EMAIL_HOST_USER, [email],)
-        EmailThread(email_message).start()
+        email_message = EmailMessage(email_subject, message,settings.EMAIL_HOST_USER, [email],) #email sender
+        EmailThread(email_message).start() #fast email sender
         messages.info(request, "Activate your account by clicking link on your email")
         return redirect('/login')
-
-
 
 
         messages.info(request, "SignUp Successful! Please Login")
