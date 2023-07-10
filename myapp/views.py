@@ -1,6 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse, redirect
-
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -25,10 +23,25 @@ def study(request):
 def contact(request):
     return render(request, 'contact.html')
 
-def login(request):
-    return render(request, 'login.html')
+def Handle_login(request):
+    if request.method=="POST":
+        username = request.POST['email']
+        userpassword = request.POST['password1']
 
-def signup(request):
+        myuser = authenticate(username=username, password=userpassword)
+
+        if myuser is not None:
+            login(request,myuser)
+            messages.success(request,"Logged in successfully")
+            return render(request, "dashboard.html")
+        else:
+            messages.error(request, "Something went wrong!")
+            return redirect("/login")
+    
+    return render(request, "login.html")
+
+
+def Handle_signup(request):
     if request.method=="POST":
         email = request.POST['email']
         password = request.POST['password1']
@@ -45,9 +58,10 @@ def signup(request):
         except Exception as identifier:
             pass
 
+        #username email and password
         myuser = User.objects.create_user(email, email, password)
         myuser.save()
-        messages.info(request, "SignUp Successful! Please Login")
+        messages.warning(request, "SignUp Successful! Please Login")
         return redirect('/login')
 
     return render(request, 'signup.html')
