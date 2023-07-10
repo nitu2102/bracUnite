@@ -22,6 +22,12 @@ def study(request):
     return render(request, 'study.html')
 def contact(request):
     return render(request, 'contact.html')
+def student(request):
+    return render(request, 'student.html')
+def alumni(request):
+    return render(request, 'alumni.html')
+def faculty(request):
+    return render(request, 'faculty.html')
 
 def Handle_login(request):
     if request.method=="POST":
