@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .models import Profile
 
 #For activating the account
 from django.contrib.sites.shortcuts import get_current_site
@@ -82,6 +83,16 @@ def Handle_signup(request):
     storage.used = True
 
     if request.method=="POST":
+        print(request.POST["signupType"])
+        userRole = request.POST["signupType"]
+        profileName = request.POST['username']
+        studentId = ""
+        if request.POST["studentID"] is not None:
+            studentId = request.POST["studentID"]
+        
+            
+
+
         email = request.POST['email']
         password = request.POST['password1']
         confirm_password = request.POST['password2']
@@ -100,7 +111,17 @@ def Handle_signup(request):
         #username email and password
         user = User.objects.create_user(email, email, password) #username=email,email,password
         user.is_active = False
+        
+        
         user.save()
+        
+        user.profile.name = profileName
+        user.profile.role = userRole
+        user.profile.student_id = studentId
+        print(user.profile.name, user.profile.role)
+        user.save()
+
+
         current_site = get_current_site(request)
         email_subject = "Activate Your Account"
         message = render_to_string('activate.html',{

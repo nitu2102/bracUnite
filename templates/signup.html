@@ -110,10 +110,10 @@ select{
 
             <div class="form-group">
               <label for="signupType">Signup as:</label>
-              <select id="signupType" onchange="showFields(this.value)">
-                <option value="student">Student</option>
-                <option value="alumni">Alumni</option>
-                <option value="faculty">Faculty</option>
+              <select name="signupType" id="signupType" onchange="showFields(this.value)">
+                <option value="Student">Student</option>
+                <option value="Alumni">Alumni</option>
+                <option value="Faculty">Faculty</option>
               </select>
             </div>
           
@@ -125,7 +125,7 @@ select{
           
             <div id="studentIDField">
               <label for="studentID">Student ID</label>
-              <input type="text" placeholder="Student ID" id="studentID" name="studentID" required>
+              <input type="text" placeholder="Student ID" id="studentID" name="studentID">
             </div>
           
             <label for="password1">Password</label>
@@ -143,7 +143,7 @@ select{
             function showFields(value) {
               const studentIDField = document.getElementById('studentIDField');
               
-              if (value === 'faculty') {
+              if (value === 'Faculty') {
                 studentIDField.style.display = 'none';
               } else {
                 studentIDField.style.display = 'block';
