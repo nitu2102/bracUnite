@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit profile</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      color: #333;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Center the form on the screen */
+    .update-profile-form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style form headings */
+    .update-profile-form h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    /* Style form fields */
+    .update-profile-form label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .update-profile-form input[type="text"],
+    .update-profile-form input[type="email"],
+    .update-profile-form input[type="date"],
+    .update-profile-form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      color: #333;
+    }
+
+    .update-profile-form select {
+      height: 40px;
+    }
+
+    /* Style the submit button */
+    .update-profile-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2c3e50;
+      border: none;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Pulsating animation for the button */
+    .update-profile-form button:hover {
+      animation: pulse 1s ease infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Your header content goes here -->
+  </header>
+  <main>
+    <div class="update-profile-form">
+      <h2>Update Profile</h2>
+      <form method="post" enctype="multipart/form-data" id="profile-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <!-- Your footer content goes here -->
+  </footer>
+</body>
+</html>

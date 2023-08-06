@@ -130,7 +130,7 @@ body.dark{
     flex-direction: column;
 }
 header .image-text .name {
-    margin-top: 2px;
+    margin-top: 16px;
     font-size: 18px;
     font-weight: 600;
 }
@@ -182,12 +182,7 @@ body.dark .sidebar header .toggle{
     margin-top: 40px;
 }
 
-.sidebar li.search-box{
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    cursor: pointer;
-    transition: var(--tran-05);
-}
+
 
 .sidebar li.search-box input{
     height: 100%;
@@ -334,8 +329,8 @@ body.dark .home .text{
                 </span>
 
                 <div class="text logo-text">
-                    <span class="name">Codinglab</span>
-                    <span class="profession">Web developer</span>
+                    <span class="name">bracUnite</span>
+                    <!--<span class="profession">bracu</span>-->
                 </div>
             </div>
 
@@ -346,22 +341,20 @@ body.dark .home .text{
             <div class="menu">
 
                 <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search...">
                 </li>
 
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bx-home-alt icon' ></i>
-                            <span class="text nav-text">Dashboard</span>
+                            <i class='bx bx-user alt icon ' ></i>
+                            <span class="text nav-text">Profile</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bx-bar-chart-alt-2 icon' ></i>
-                            <span class="text nav-text">Revenue</span>
+                            <i class='bx bx-home-alt icon' ></i>
+                            <span class="text nav-text">Dashboard</span>
                         </a>
                     </li>
 
@@ -372,24 +365,19 @@ body.dark .home .text{
                         </a>
                     </li>
 
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-pie-chart-alt icon' ></i>
-                            <span class="text nav-text">Analytics</span>
-                        </a>
-                    </li>
 
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bx-heart icon' ></i>
-                            <span class="text nav-text">Likes</span>
+                            <i class='bx bx-car icon' ></i>
+                            <span class="text nav-text">Request a ride</span>
                         </a>
                     </li>
 
+                    
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text">Wallets</span>
+                            <i class='bx bx-phone-call icon' ></i>
+                            <span class="text nav-text">Contact Us</span>
                         </a>
                     </li>
 
@@ -432,7 +420,7 @@ body.dark .home .text{
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>Responsive HTML Table With Pure CSS - Web Design/UI Design</title>
+     <title>Alumni Dashboard</title>
      <link rel="stylesheet" href="style.css">
      <style>
  
@@ -672,7 +660,7 @@ thead th.active,tbody td.active {
 }
 
 .export__file .export__file-btn {
-  display: inline-block;
+  display: none;
   width: 2rem;
   height: 2rem;
   background: #fff6 url(images/export.png) center / 80% no-repeat;
@@ -753,17 +741,7 @@ thead th.active,tbody td.active {
                  <input type="search" placeholder="Search Data...">
                  <img src="\static\images\search.png" alt="">
              </div>
-             <div class="export__file">
-                 <label for="export-file" class="export__file-btn" title="Export File"></label>
-                 <input type="checkbox" id="export-file">
-                 <div class="export__file-options">
-                     <label>Export As &nbsp; &#10140;</label>
-                     <label for="export-file" id="toPDF">PDF <img src="images/pdf.png" alt=""></label>
-                     <label for="export-file" id="toJSON">JSON <img src="images/json.png" alt=""></label>
-                     <label for="export-file" id="toCSV">CSV <img src="images/csv.png" alt=""></label>
-                     <label for="export-file" id="toEXCEL">EXCEL <img src="images/excel.png" alt=""></label>
-                 </div>
-             </div>
+
          </section>
          <section class="table__body">
              <table>

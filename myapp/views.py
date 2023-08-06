@@ -2,8 +2,11 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required  
 from django.contrib import messages
 from .models import Profile
+from .forms import ProfileUpdateForm
+
 
 #For activating the account
 from django.contrib.sites.shortcuts import get_current_site
@@ -53,8 +56,11 @@ def student(request):
     return render(request, 'student.html')
 def alumni(request):
     return render(request, 'alumni.html')
+
+@login_required
 def faculty(request):
-    return render(request, 'faculty.html')
+    faculties = Profile.objects.filter(is_active=True)
+    return render(request, 'faculty.html', {'faculties':faculties})
 
 def Handle_login(request):
     storage = messages.get_messages(request)
@@ -143,7 +149,7 @@ def Handle_signup(request):
     return render(request, 'signup.html')
 
 
-
+@login_required
 def Handle_logout(request):
     storage = messages.get_messages(request)
     storage.used = True
@@ -168,4 +174,16 @@ class ActivateAccountView(View):
             return redirect('/login')
         return render(request, 'activatefail.html')
 
+@login_required
+def profile_update(request):
+    profile = request.user.profile
 
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('Dashboard')  # Redirect to the profile detail page after successful update
+    else:
+        form = ProfileUpdateForm(instance=profile)
+
+    return render(request, 'profile_update.html', {'form': form})
