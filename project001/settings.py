@@ -123,6 +123,7 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR, 'static')
 ]
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -138,3 +139,7 @@ EMAIL_HOST_PASSWORD = '01614012602nITu'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

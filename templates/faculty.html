@@ -762,7 +762,7 @@ thead th.active,tbody td.active {
                    {% for f in faculties %}
                    {% if f.role == "Faculty" %}
                    <tr>
-                       <td> <img src="images/Zinzu Chan Lee.jpg" alt="">{{f.name}}</td>
+                       <td> <img src="{{f.profile_pic.url}}" alt="">{{f.name}}</td>
                        <td> {{f.department}} </td>
                        <td> {{f.blood_group}} </td>
 
