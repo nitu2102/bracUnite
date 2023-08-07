@@ -40,6 +40,7 @@ class Profile(models.Model):
     role = models.CharField(null=True, max_length=200, default='Student')    
     student_id = models.CharField(null=True, max_length=200, default='N')
     is_active = models.BooleanField(default=False)
+    profession = models.CharField(null=True, max_length=200, default='N')
     
 
     room_no = models.CharField(null=True, max_length=200, default='N')

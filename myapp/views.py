@@ -52,10 +52,16 @@ def study(request):
     return render(request, 'study.html')
 def contact(request):
     return render(request, 'contact.html')
+
+@login_required
 def student(request):
-    return render(request, 'student.html')
+    students = Profile.objects.filter(is_active=True)
+    return render(request, 'student.html', {'students':students})
+
+@login_required
 def alumni(request):
-    return render(request, 'alumni.html')
+    alumnis = Profile.objects.filter(is_active=True)
+    return render(request, 'alumni.html', {'alumnis':alumnis})
 
 @login_required
 def faculty(request):
