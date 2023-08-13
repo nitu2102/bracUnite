@@ -39,7 +39,7 @@ class EmailThread(threading.Thread):
         self.email_message.send()
 
 
-
+@login_required(login_url='/login')
 def dashboard(request):
     return render(request, 'dashboard.html')
 def home(request):
@@ -53,17 +53,17 @@ def study(request):
 def contact(request):
     return render(request, 'contact.html')
 
-@login_required
+@login_required(login_url='/login')
 def student(request):
     students = Profile.objects.filter(is_active=True)
     return render(request, 'student.html', {'students':students})
 
-@login_required
+@login_required(login_url='/login')
 def alumni(request):
     alumnis = Profile.objects.filter(is_active=True)
     return render(request, 'alumni.html', {'alumnis':alumnis})
 
-@login_required
+@login_required(login_url='/login')
 def faculty(request):
     faculties = Profile.objects.filter(is_active=True)
     return render(request, 'faculty.html', {'faculties':faculties})
@@ -71,6 +71,9 @@ def faculty(request):
 def Handle_login(request):
     storage = messages.get_messages(request)
     storage.used = True   #clear error msg
+
+    if request.user.is_authenticated:
+        return redirect("/dashboard")
 
     if request.method=="POST":
         username = request.POST['email']
@@ -154,15 +157,14 @@ def Handle_signup(request):
 
     return render(request, 'signup.html')
 
-
-@login_required
+@login_required(login_url='/login')
 def Handle_logout(request):
     storage = messages.get_messages(request)
     storage.used = True
-
     logout(request)
     messages.success(request, "Logout Success")
     return redirect('/login')
+
 
 
 class ActivateAccountView(View):
@@ -180,7 +182,7 @@ class ActivateAccountView(View):
             return redirect('/login')
         return render(request, 'activatefail.html')
 
-@login_required
+@login_required(login_url='/login')
 def profile_update(request):
     profile = request.user.profile
 
