@@ -540,10 +540,17 @@
     .timeline_about .contact_info ul .site span {
       color: var(--f5-color);
     }
+
+    .work1 .heading1{
+      text-decoration: underline;
+      font-weight: bold;
+
+    }
     </style>
 </head>
 
 <body style="background-color:#0f053e;">
+
     <!-- ===== ===== Body Main-Background ===== ===== -->
     <span class="main_bg"></span>
 
@@ -554,8 +561,8 @@
         <!-- ===== ===== Header/Navbar ===== ===== -->
         <header>
             <div class="brandLogo">
-                <figure><img src="web_logo.jpg" alt="logo" width="40px" height="40px"></figure>
-                <span>MarqueTech</span>
+                {% comment %} <figure><img src="web_logo.jpg" alt="logo" width="40px" height="40px"></figure> {% endcomment %}
+                <span>bracUnite</span>
             </div>
         </header>
 
@@ -563,7 +570,7 @@
         <!-- ===== ===== User Main-Profile ===== ===== -->
         <section class="userProfile card">
             <div class="profile">
-                <figure><img src="profile.png" alt="profile" width="250px" height="250px"></figure>
+                <figure><img src={{userProfile.profile_pic.url}} alt="profile" width="250px" height="250px"></figure>
             </div>
         </section>
 
@@ -572,74 +579,133 @@
         <section class="work_skills card">
 
             <!-- ===== ===== Work Contaienr ===== ===== -->
+            
+            
+            
+            
+            
+          
             <div class="work">
-                <h1 class="heading">work</h1>
+                <h1 class="heading">Current Profession</h1>
                 <div class="primary">
-                    <h1>Spotify New York</h1>
-                    <span>Primary</span>
-                    <p>170 William Street <br> New York, NY 10038-212-315-51</p>
+                    <h1>{{userProfile.profession}}</h1>
+                    {% comment %} <p>170 William Street <br> New York, NY 10038-212-315-51</p> {% endcomment %}
                 </div>
 
-                <div class="secondary">
-                    <h1>Metropolitan <br> Museum</h1>
-                    <span>Secondary</span>
-                    <p>S34 E 65th Street <br> New York, NY 10651-78 156-187-60</p>
-                </div>
             </div>
+            <br>
+         
 
             <!-- ===== ===== Skills Contaienr ===== ===== -->
             <div class="skills">
-                <h1 class="heading">Skills</h1>
+                <h1 class="heading">Research interest(s)</h1>
                 <ul>
-                    <li style="--i:0">Android</li>
-                    <li style="--i:1">Web-Design</li>
-                    <li style="--i:2">UI/UX</li>
-                    <li style="--i:3">Video Editing</li>
+                  
+                  {%for s in userProfile.research_interest_as_list%}
+                    <li style="--i:{{forloop.counter}}">{{s}}</li>
+                  {%endfor%}
                 </ul>
             </div>
+
+            <br>
+
+            <div class="skills">
+              <h1 class="heading">Skills</h1>
+              <ul>
+                
+                {%for s in userProfile.skills_listed%}
+                  <li style="--i:{{forloop.counter}}">{{s}}</li>
+                {%endfor%}
+              </ul>
+              <br>
+          </div>
+
+          {%if userProfile.publication != "N"%}
+          <div class="skills">
+            <h1 class="heading">Publications</h1>
+            <ol>
+              
+              {%for s in userProfile.publication_listed%}
+                <li style="--i:{{forloop.counter}}">{{s}}</li>
+              {%endfor%}
+            </ol>
+            <br>
+        </div>
+
+        {%endif%}
+
+
+        {%if userProfile.projects != "N"%}
+          <div class="skills">
+            <h1 class="heading">Projects</h1>
+            <ol>
+              {%for s in userProfile.project_listed%}
+              <li>{{s}}</li>
+              {%endfor%}
+            </ol>
+        </div>
+        {%endif%}
         </section>
 
 
         <!-- ===== ===== User Details Sections ===== ===== -->
         <section class="userDetails card">
             <div class="userName">
-                <h1 class="name">Jeremy Rose</h1>
+                <h1 class="name">{{userProfile.name}}</h1>
                 <div class="map">
                     <i class="ri-map-pin-fill ri"></i>
-                    <span>New York, NY</span>
+                    {%if userProfile.facinitial != "N"%}
+                    <span>Initial: {{userProfile.facinitial}}</span>
+                    {% endif %}
+                    
                 </div>
-                <p>Product Designer</p>
+                <p>Role: {{userProfile.role}}</p>
             </div>
 
-            <div class="rank">
-                <h1 class="heading">Rankings</h1>
-                <span>8,6</span>
-                <div class="rating">
-                    <i class="ri-star-fill rate"></i>
-                    <i class="ri-star-fill rate"></i>
-                    <i class="ri-star-fill rate"></i>
-                    <i class="ri-star-fill rate"></i>
-                    <i class="ri-star-fill rate underrate"></i>
-                </div>
-            </div>
+       
 
             <div class="btns">
                 <ul>
-                    <li class="sendMsg">
-                        <i class="ri-chat-4-fill ri"></i>
-                        <a href="#">Send Message</a>
-                    </li>
 
                     <li class="sendMsg active">
                         <i class="ri-check-fill ri"></i>
-                        <a href="#">Contacts</a>
+                        <a href="mailto: {{userProfile.user.email}}">Send Email</a>
                     </li>
 
                     <li class="sendMsg">
-                        <a href="#">Report User</a>
+                        {% comment %} <a href="#">Report User</a> {% endcomment %}
                     </li>
                 </ul>
             </div>
+            <br>
+            <div class="work1">
+              <h1 class="heading1"><strong><b>Educational Background<b><strong></h1>
+              
+              {%if userProfile.phd != "N"%}
+              <div class="primary">
+                <h1><i>PhD:</i> <br>{{userProfile.phd}}</h1>
+              </div>
+              {%endif%}
+
+              {%if userProfile.msc != "N"%}
+              <div class="primary">
+                <h1><i>MSc:</i> <br>{{userProfile.msc}}</h1>
+              </div>
+              {%endif%}
+                
+              
+              
+              <div class="primary">
+                  <h1><i>BSc:</i> <br>{{userProfile.university}}</h1>
+              </div>
+              <div class="primary">
+                <h1><i>College:</i> <br>{{userProfile.college}}</h1>
+            </div>
+            <div class="primary">
+                  <h1><i>School:</i> <br>{{userProfile.school}}</h1>
+              </div>
+
+          </div>
         </section>
 
 
@@ -649,7 +715,7 @@
                 <ul>
                     <li class="timeline">
                         <i class="ri-eye-fill ri"></i>
-                        <span>Timeline</span>
+                        {% comment %} <span>Timeline</span> {% endcomment %}
                     </li>
 
                     <li class="about active">
@@ -659,47 +725,96 @@
                 </ul>
             </div>
 
-            <div class="contact_Info">
+            <div class="basic_info">
                 <h1 class="heading">Contact Information</h1>
                 <ul>
-                    <li class="phone">
+                    {% comment %} <li class="phone">
                         <h1 class="label">Phone:</h1>
                         <span class="info">+11 234 567 890</span>
-                    </li>
+                    </li> {% endcomment %}
 
                     <li class="address">
                         <h1 class="label">Address:</h1>
-                        <span class="info">S34 E 65th Street <br> New York, NY 10651-78 156-187-60</span>
+                        <span class="info">{{userProfile.current_city}}</span>
                     </li>
 
                     <li class="email">
-                        <h1 class="label">E-mail:</h1>
-                        <span class="info">hello@rsmarquetech.com</span>
+                        <h1 class="label">Gsuite E-mail:</h1>
+                        <span class="info">{{userProfile.user.email}}</span>
                     </li>
+                    <li class="email">
+                      <h1 class="label">Regular E-mail:</h1>
+                      <span class="info">{{userProfile.gsuiteEmail}}</span>
+                  </li>
 
-                    <li class="site">
-                        <h1 class="label">Site:</h1>
-                        <span class="info">www.rsmarquetech.com</span>
-                    </li>
+                    
                 </ul>
             </div>
-
+            <br>
             <div class="basic_info">
                 <h1 class="heading">Basic Information</h1>
                 <ul>
-                    <li class="birthday">
-                        <h1 class="label">Birthday:</h1>
-                        <span class="info">Dec 25, 2000</span>
-                    </li>
-
+                  <li class="sex">
+                    <h1 class="label">Department:</h1>
+                    <span class="info">{{userProfile.department}}</span>
+                </li>
+                   
                     <li class="sex">
-                        <h1 class="label">Gender:</h1>
-                        <span class="info">Male</span>
-                    </li>
+                      <h1 class="label">Blood group:</h1>
+                      <span class="info">{{userProfile.blood_group}}</span>
+                  </li>
+                  <li class="sex">
+                    <h1 class="label">Hobbies:</h1>
+                    <span class="info">{{userProfile.hobby}}</span>
+                </li>
+                <li class="sex">
+                  <h1 class="label">Joined Clubs:</h1>
+                  <span class="info">{{userProfile.clubs}}</span>
+              </li>
+                <li class="sex">
+                  <h1 class="label">Gender:</h1>
+                  <span class="info">{{userProfile.gender}}</span>
+              </li>
+              {%if userProfile.room_no != "N"%}
+              <li class="sex">
+                <h1 class="label">Room no:</h1>
+                <span class="info">{{userProfile.room_no}}</span>
+            </li>
+            {%endif%}
+             
+
+
+
+            <li class="sex">
+              <h1 class="label">Gender:</h1>
+              <span class="info">{{userProfile.gender}}</span>
+          </li>
+            <li class="birthday">
+              <h1 class="label">Birthday:</h1>
+              <span class="info">{{userProfile.birth_date}}</span>
+          </li>
                 </ul>
+
+
             </div>
+            <br>
+            {% if userProfile.courses != "N"%}
+            <div class="basic_info">
+              <h1 class="heading">Course Information</h1>
+              <ol>
+                {%for s in userProfile.course_listed%}
+                <li style="--i:{{forloop.counter}}">{{s}}</li>
+              {%endfor%}
+              </ol>
+          </div>
+          {%endif%}
         </section>
+        
     </div>
+
+
+    
+    
 
 </body>
 

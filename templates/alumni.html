@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-  <!-- Coding by CodingLab | www.codinglabweb.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +11,7 @@
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     
-    <!--<title>Dashboard Sidebar Menu</title>--> 
+    <!--<title>Alumni Dashboard Sidebar Menu</title>--> 
     <style>
       /* Google Font Import - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -75,7 +74,6 @@ body.dark{
     width: 88px;
 }
 
-/* ===== Reusable code - Here ===== */
 .sidebar li{
     height: 50px;
     list-style: none;
@@ -762,7 +760,7 @@ thead th.active,tbody td.active {
                    {% for a in alumnis %}
                    {% if a.role == "Alumni" %}
                    <tr>
-                       <td> <img src="{{a.profile_pic.url}}" alt="">{{a.name}}</td>
+                       <td> <img src="{{a.profile_pic.url}}" alt=""><a href="{% url 'portfolio' user_id=a.id %}">{{a.name}}</a></td>
                        <td> {{a.department}} </td>
                        <td> {{a.blood_group}} </td>
 

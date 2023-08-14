@@ -774,7 +774,7 @@ thead th.active,tbody td.active {
                    {% for s in students %}
                    {% if s.role == "Student" %}
                    <tr>
-                       <td> <img src="{{s.profile_pic.url}}" alt="">{{s.name}}</td>
+                       <td> <img src="{{s.profile_pic.url}}" alt=""><a href="{% url 'portfolio' user_id=s.id %}">{{s.name}}</a></td>
                        <td> {{s.department}} </td>
                        <td> {{s.blood_group}} </td>
 
