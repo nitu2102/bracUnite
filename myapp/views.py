@@ -49,7 +49,7 @@ def dashboard(request):
 def home(request):
     if request.user.is_authenticated:
         CurrentUser = request.user
-    return render(request, 'dashboard.html', {'CurrentUser':CurrentUser})
+        return render(request, 'dashboard.html', {'CurrentUser':CurrentUser})
     return render(request, 'home.html')
 def about(request):
     return render(request, 'about.html')
