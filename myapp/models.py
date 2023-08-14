@@ -31,24 +31,51 @@ BLOOD_GROUP_CHOICES = [
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)   
-    name =  models.CharField(null=True, max_length=200, default="None")
+    name =  models.CharField(null=True,blank=True, max_length=200, default="None")
     profile_pic = models.ImageField(default='default.jpg', upload_to='profiles_pics')
-    hobby = models.CharField(null=False, max_length=200, default='N')
-    department = models.CharField(null=False, max_length=200, default='N')
-    blood_group = models.CharField(max_length=200, choices=BLOOD_GROUP_CHOICES, default='UNKNOWN')
+    hobby = models.CharField(null=True,blank=True, max_length=200, default='N')
+    skills = models.CharField(null=True,blank=True, max_length=200, default='N')
+    department = models.CharField(null=True,blank=True, max_length=200, default='N')
+    blood_group = models.CharField(null=True,blank=True,max_length=200, choices=BLOOD_GROUP_CHOICES, default='UNKNOWN')
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='N')
-    role = models.CharField(null=True, max_length=200, default='Student')    
-    student_id = models.CharField(null=True, max_length=200, default='N')
+    role = models.CharField(null=True,blank=True, max_length=200, default='Student')    
+    student_id = models.CharField(null=True,blank=True, max_length=200, default='N')
     is_active = models.BooleanField(default=False)
-    profession = models.CharField(null=True, max_length=200, default='N')
+    profession = models.CharField(null=True,blank=True, max_length=200, default='N')
     
 
-    room_no = models.CharField(null=True, max_length=200, default='N')
-    research_interest = models.CharField(null=True, max_length=200, default='N')
-    current_city = models.CharField(null=True, max_length=200, default='N')
+    room_no = models.CharField(null=True,blank=True, max_length=200, default='N')
+    research_interest = models.CharField(null=True,blank=True, max_length=200, default='N')
+    current_city = models.CharField(null=True,blank=True, max_length=200, default='N')
+
+    gsuiteEmail = models.CharField(null=True,blank=True, max_length=200, default='N')
+    projects = models.CharField(null=True,blank=True,max_length=200, default='N')
+    school = models.CharField(null=True,blank=True, max_length=200, default='N')
+    college = models.CharField(null=True,blank=True, max_length=200, default='N')
+    university = models.CharField(null=True,blank=True, max_length=200, default='BRAC University')
+    publication = models.CharField(null=True,blank=True, max_length=200, default='N')
+    clubs = models.CharField(null=True,blank=True, max_length=200, default='N')
+    courses = models.CharField(null=True,blank=True, max_length=200, default='N')
+    facinitial = models.CharField(null=True,blank=True, max_length=200, default='N')
+    msc = models.CharField(null=True,blank=True, max_length=200, default='N')
+    phd = models.CharField(null=True,blank=True, max_length=200, default='N')
+    bsc = models.CharField(null=True,blank=True, max_length=200, default='N')
+
+
+    def research_interest_as_list(self):
+        return self.research_interest.split(',')
+    def skills_listed(self):
+        return self.skills.split(',')
+    def publication_listed(self):
+        return self.publication.split(',')
+    def project_listed(self):
+        return self.projects.split(',')
+    def course_listed(self):
+        return self.courses.split(',')
 
     def __str__(self):
         return self.name
+    
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):

@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Profile
 from .forms import ProfileUpdateForm
+from django.shortcuts import render, get_object_or_404
+
 
 
 #For activating the account
@@ -42,12 +44,28 @@ class EmailThread(threading.Thread):
 @login_required(login_url='/login')
 def dashboard(request):
     return render(request, 'dashboard.html')
+
 def home(request):
+    if request.user.is_authenticated:
+        return render(request, 'dashboard.html')
     return render(request, 'home.html')
 def about(request):
     return render(request, 'about.html')
-def portfolio(request):
-    return render(request, 'portfolio.html')
+
+
+
+
+@login_required(login_url='/login')
+def portfolio(request, user_id):
+    userProfile = Profile.objects.get(id=user_id)
+
+    print(type(userProfile.research_interest))
+    return render(request, 'portfolio.html', {'userProfile':userProfile})
+
+
+
+
+
 def study(request):
     return render(request, 'study.html')
 def contact(request):
@@ -109,6 +127,9 @@ def Handle_signup(request):
 
 
         email = request.POST['email']
+        if not email.endswith("g.bracu.ac.bd"):
+            messages.warning(request, "You must insert a valid gsuite email!")
+            return render(request, 'signup.html')
         password = request.POST['password1']
         confirm_password = request.POST['password2']
         if password!=confirm_password:
