@@ -142,8 +142,9 @@ select{
           <script>
             function showFields(value) {
               const studentIDField = document.getElementById('studentIDField');
-              
+              const emailField = document.querySelector('label[for="email"]');
               if (value === 'Faculty') {
+                emailField.textContent = 'Email';
                 studentIDField.style.display = 'none';
               } else {
                 studentIDField.style.display = 'block';

@@ -48,7 +48,8 @@ def dashboard(request):
 
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'dashboard.html')
+        CurrentUser = request.user
+    return render(request, 'dashboard.html', {'CurrentUser':CurrentUser})
     return render(request, 'home.html')
 def about(request):
     return render(request, 'about.html')
@@ -129,8 +130,9 @@ def Handle_signup(request):
 
         email = request.POST['email']
         if not email.endswith("g.bracu.ac.bd"):
-            messages.warning(request, "You must insert a valid gsuite email!")
-            return render(request, 'signup.html')
+            if userRole!="Faculty":
+                messages.warning(request, "You must insert a valid gsuite email!")
+                return render(request, 'signup.html')
         password = request.POST['password1']
         confirm_password = request.POST['password2']
         if password!=confirm_password:
