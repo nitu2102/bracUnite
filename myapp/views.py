@@ -43,7 +43,8 @@ class EmailThread(threading.Thread):
 
 @login_required(login_url='/login')
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    CurrentUser = request.user
+    return render(request, 'dashboard.html', {'CurrentUser':CurrentUser})
 
 def home(request):
     if request.user.is_authenticated:
@@ -102,7 +103,7 @@ def Handle_login(request):
         if myuser is not None:
             login(request,myuser)
             messages.success(request,"Logged in successfully")
-            return render(request, "dashboard.html")
+            return redirect("/dashboard")
         else:
             messages.error(request, "Something went wrong!")
             return redirect("/login")
