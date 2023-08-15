@@ -223,7 +223,12 @@ def profile_update(request):
 
 @login_required(login_url='/login')
 def cv(request,user_id):
+    if request.user.is_superuser:
+        user_id = user_id+1
     CurrentUser = Profile.objects.get(id=user_id)
     return render(request, 'cv.html', {'CurrentUser':CurrentUser})
+
+
+
 
 
