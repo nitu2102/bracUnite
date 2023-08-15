@@ -219,3 +219,11 @@ def profile_update(request):
         form = ProfileUpdateForm(instance=profile)
 
     return render(request, 'profile_update.html', {'form': form})
+
+
+@login_required(login_url='/login')
+def cv(request,user_id):
+    CurrentUser = Profile.objects.get(id=user_id)
+    return render(request, 'cv.html', {'CurrentUser':CurrentUser})
+
+

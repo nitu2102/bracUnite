@@ -60,7 +60,8 @@ class Profile(models.Model):
     msc = models.CharField(null=True,blank=True, max_length=200, default='N')
     phd = models.CharField(null=True,blank=True, max_length=200, default='N')
     bsc = models.CharField(null=True,blank=True, max_length=200, default='N')
-
+    bio = models.CharField(null=True,blank=True, max_length=200, default='N')
+    certifications = models.CharField(null=True,blank=True, max_length=400, default='N')
 
     def research_interest_as_list(self):
         return self.research_interest.split(',')
@@ -72,6 +73,13 @@ class Profile(models.Model):
         return self.projects.split(',')
     def course_listed(self):
         return self.courses.split(',')
+    def certifications_listed(self):
+        return self.certifications.split(',')
+    def current_city_listed(self):
+        items = self.current_city.split(',')
+        var = ",\n ".join(items)
+        print(var)
+        return var
 
     def __str__(self):
         return self.name
