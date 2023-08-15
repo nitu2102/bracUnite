@@ -574,11 +574,18 @@ h3{
                 <li class="nav-link">
                     <a href="\admin">
                         <i class='bx bx-lock alt icon ' ></i>
-                        <span class="text nav-text">Admin Panel</span>
+                        <span class="text nav-text">Admin Panel {{CurrentUser.id}}</span>
+                    </a>
+                </li>
+                {%else%}
+                <li class="nav-link">
+                    <a href="{%url 'portfolio' user_id=CurrentUser.id|add:-1%}">
+                        <i class='bx bx-user alt icon ' ></i>
+                        <span class="text nav-text">Profile</span>
                     </a>
                 </li>
                 {% endif %}
-
+                
                   <li class="nav-link">
                       <a href="\edit">
                           <i class='bx bx-user alt icon ' ></i>
