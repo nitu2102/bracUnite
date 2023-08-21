@@ -779,6 +779,12 @@ thead th.active,tbody td.active {
   width: 2rem;
   height: auto;
 }
+
+li{
+    list-style-type: none;
+}
+
+
      </style>
  </head>
  
@@ -797,14 +803,21 @@ thead th.active,tbody td.active {
                 <thead>
                     <tr>
                         <th> Name <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Student ID <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Department <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Blood Group <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Research Interest <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Current city <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Hobbies <span class="icon-arrow">&UpArrow;</span></th>
 
-                        <th> Email <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> G-suite Email <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Sex <span class="icon-arrow">&UpArrow;</span></th>
+
+                        <th> School <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> College <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Joined Clubs <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Courses <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Skills <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Role <span class="icon-arrow">&UpArrow;</span></th>
                     </tr>
                 </thead>
@@ -813,6 +826,7 @@ thead th.active,tbody td.active {
                    {% if s.role == "Student" %}
                    <tr>
                        <td> <img src="{{s.profile_pic.url}}" alt=""><a href="{% url 'portfolio' user_id=s.id %}">{{s.name}}</a></td>
+                       <td> {{s.student_id}} </td>
                        <td> {{s.department}} </td>
                        <td> {{s.blood_group}} </td>
 
@@ -822,6 +836,24 @@ thead th.active,tbody td.active {
 
                        <td>{{s.user.email}}</td>
                        <td>{{s.gender}}</td>
+
+                       <td>{{s.school}}</td>
+                       <td>{{s.college}}</td>
+                       <td>
+                        {%for i in s.club_listed%}
+                            <li>{{i}}</li>
+                        {%endfor%}
+                       </td>
+                       <td>
+                        {%for i in s.course_listed%}
+                            <li>{{i}}</li>
+                        {%endfor%}
+                       </td>
+                       <td>
+                        {%for i in s.skills_listed%}
+                            <li>{{i}}</li>
+                        {%endfor%}
+                       </td>
                        <td>{{s.role}}</td>
                    </tr>
                    {% endif %}

@@ -779,6 +779,10 @@ thead th.active,tbody td.active {
   width: 2rem;
   height: auto;
 }
+
+li{
+    list-style-type: none;
+}
      </style>
  </head>
  
@@ -797,12 +801,16 @@ thead th.active,tbody td.active {
                 <thead>
                     <tr>
                         <th> Name <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> BRACU ID <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Department <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Blood Group <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Research Interest <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Profession <span class="icon-arrow">&UpArrow;</span></th>
 
+                        <th> Current city <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Current University <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Email <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Skills <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Sex <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Role <span class="icon-arrow">&UpArrow;</span></th>
                     </tr>
@@ -812,13 +820,21 @@ thead th.active,tbody td.active {
                    {% if a.role == "Alumni" %}
                    <tr>
                        <td> <img src="{{a.profile_pic.url}}" alt=""><a href="{% url 'portfolio' user_id=a.id %}">{{a.name}}</a></td>
+                       <td> {{a.student_id}} </td>
                        <td> {{a.department}} </td>
                        <td> {{a.blood_group}} </td>
 
                        <td> {{a.research_interest}} </td>
                        <td> {{a.profession}} </td>
 
+                       <td>{{a.current_city}}</td>
+                       <td>{{a.msc}}</td>
                        <td>{{a.user.email}}</td>
+                       <td>
+                        {%for i in a.skills_listed%}
+                            <li>{{i}}</li>
+                        {%endfor%}
+                       </td>
                        <td>{{a.gender}}</td>
                        <td>{{a.role}}</td>
                    </tr>

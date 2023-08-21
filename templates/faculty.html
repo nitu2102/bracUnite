@@ -780,6 +780,11 @@ thead th.active,tbody td.active {
   width: 2rem;
   height: auto;
 }
+
+li{
+    list-style-type: none;
+}
+
      </style>
  </head>
  
@@ -798,10 +803,12 @@ thead th.active,tbody td.active {
                 <thead>
                     <tr>
                         <th> Name <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Initial <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Department <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Blood Group <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Research Interest <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Room No. <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Hobbies <span class="icon-arrow">&UpArrow;</span></th>
 
                         <th> Email <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Sex <span class="icon-arrow">&UpArrow;</span></th>
@@ -813,11 +820,13 @@ thead th.active,tbody td.active {
                    {% if f.role == "Faculty" %}
                    <tr>
                        <td> <img src="{{f.profile_pic.url}}" alt=""><a href="{% url 'portfolio' user_id=f.id %}">{{f.name}}</a></td>
+                       <td> {{f.facinitial}} </td>
                        <td> {{f.department}} </td>
                        <td> {{f.blood_group}} </td>
 
                        <td> {{f.research_interest}} </td>
                        <td> {{f.room_no}} </td>
+                       <td> {{f.hobby}} </td>
 
                        <td>{{f.user.email}}</td>
                        <td>{{f.gender}}</td>
