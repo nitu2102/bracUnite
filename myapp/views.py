@@ -56,6 +56,8 @@ def home(request):
     
         return render(request, 'dashboard.html', {'CurrentUser':CurrentUser})
     return render(request, 'home.html')
+
+@login_required(login_url='/login')
 def about(request):
     return render(request, 'about.html')
 
@@ -70,9 +72,11 @@ def portfolio(request, user_id):
 
 
 
-
+@login_required(login_url='/login')
 def study(request):
     return render(request, 'study.html')
+
+@login_required(login_url='/login')
 def contact(request):
     return render(request, 'contact.html')
 
