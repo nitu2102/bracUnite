@@ -20,6 +20,9 @@ urlpatterns = [
     path('faculty/', views.faculty, name='Faculty'),
     path('edit/', views.profile_update, name='profile_update'),
     path('cv/<int:user_id>', views.cv, name='cv'),
+    path('ride/', views.ride, name='ride'),
+    path('send_notification/<int:recipient_id>/', views.send_notification, name='send_notification'),
+    path('notification/', views.see_notification, name='notification'),
 ]
 
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

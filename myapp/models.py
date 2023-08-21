@@ -26,6 +26,15 @@ BLOOD_GROUP_CHOICES = [
     ('UNKNOWN', 'Unknown'),
 ]
 
+RIDE_CHOICES = [
+    ("Route 1","Abdullahpur -> House Building -> Azampur -> Airport -> Kawla -> Khilkhet -> Biswa Road -> Shewrah -> BRAC University"),
+    ("Route 2", "Kallyanpur -> Tolarbag -> Sony-Cinema -> Mirpur-College -> Swimming-Fed -> Popular-diag. -> Pallabi -> Bonolata-shop -> Mirpur-ceramic -> Pallabi-thana -> Kalshi -> ECB -> BRAC University"),
+    ("Route 3","Jigatola -> Shankar -> Mohammadpur -> Manik Mia Ave. -> BRAC University"),
+    ("Route 4","Azimpur-etim-khana -> Azimpur Chowrasta -> New Market -> Happy Arcade -> Dhanmondi -> Kalabagan Krira -> Sobhanbag -> Manik Mia Ave -> Khejur Bagan -> BRAC University"),
+    ("Route 5","Jatrabari -> Doyaganj Mour -> Ittefaq Mour -> Mugda -> Bouddha Mandir -> Bashabo -> Khidmah hospital -> Malibag Railgate -> Abul Hotel -> Rampura TV Center -> BRAC University"),
+    ("Route 6","Baldha Garden -> Motijheel -> Arambag -> Fakirapul -> Purana Palton -> Kakrail -> Shantinagar -> Malibag -> Mouchak -> Mogbazar TNT office -> Mogbazar Mour -> BRAC University"),
+]
+
 
 
 class Profile(models.Model):
@@ -62,6 +71,9 @@ class Profile(models.Model):
     bsc = models.CharField(null=True,blank=True, max_length=200, default='N')
     bio = models.CharField(null=True,blank=True, max_length=200, default='N')
     certifications = models.CharField(null=True,blank=True, max_length=400, default='N')
+    phone = models.CharField(null=True,blank=True, max_length=200, default='N')
+
+    travel_route = models.CharField(null=True,blank=True, max_length=400, default='N', choices=RIDE_CHOICES)
 
     def research_interest_as_list(self):
         return self.research_interest.split(',')
@@ -103,3 +115,15 @@ def activate_profile(sender, instance, created, **kwargs):
     if not created and instance.is_active:
         instance.profile.is_active = True
         instance.profile.save()
+
+
+
+class Notification(models.Model):
+    sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sent_notifications')
+    recipient = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='received_notifications')
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.sender.name} requested a ride with {self.recipient.name}" 
