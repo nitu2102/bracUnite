@@ -85,6 +85,8 @@ class Profile(models.Model):
         return self.projects.split(',')
     def course_listed(self):
         return self.courses.split(',')
+    def club_listed(self):
+        return self.clubs.split(',')
     def certifications_listed(self):
         return self.certifications.split(',')
     def current_city_listed(self):
