@@ -11,7 +11,7 @@
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     
-    <!--<title>Faculty Dashboard Sidebar Menu</title>--> 
+    <!--<title>Student Dashboard Sidebar Menu</title>--> 
     <style>
       /* Google Font Import - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -179,7 +179,6 @@ body.dark .sidebar header .toggle{
 .sidebar .menu{
     margin-top: 40px;
 }
-
 
 
 
@@ -460,7 +459,7 @@ body.dark .home .text{
     </nav>
 
     <section class="home">
-        <div class="text">Faculty Dashboard</div>
+        <div class="text">Request a ride</div>
         <div>
           
  <!DOCTYPE html>
@@ -470,7 +469,7 @@ body.dark .home .text{
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>Faculty Dashboard</title>
+     <title>Student Dashboard</title>
      <link rel="stylesheet" href="style.css">
      <style>
  
@@ -780,13 +779,112 @@ thead th.active,tbody td.active {
   width: 2rem;
   height: auto;
 }
+
+/* General button style */
+.btn {
+  border: none;
+  font-family: 'Lato';
+  font-size: 10px;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 25px 80px;
+  display: inline-block;
+  margin: 15px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+/* Pseudo elements for icons */
+.btn:before {
+  font-family: 'FontAwesome';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* Icon separator */
+.btn-sep {
+  padding: 11px 11px 8px 78px;
+}
+
+.btn-sep:before {
+  background: rgba(0,0,0,0.15);
+}
+
+
+/* Button 3 */
+.btn-4 {
+  background: #6653c0;
+  color: #fff;
+}
+
+.btn-4:hover {
+  background: #2c3e50;
+}
+
+.btn-4:active {
+  background: #2c3e50;
+  top: 2px;
+}
+
+.btn-4:before {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  line-height: 3;
+  font-size: 140%;
+  width: 60px;
+}
+
+/* Icons */
+
+.icon-cart:before {
+  content: "\f07a";
+}
+
+.icon-heart:before {
+  content: "\f55a";
+}
+
+.icon-info:before {
+  content: "\f05a";
+}
+
+.icon-send:before {
+  content: "\f1d8";
+}
+
+  
      </style>
  </head>
  
  <body>
      <main class="table">
          <section class="table__header">
-             <h1>Faculty Information</h1>
+             <h1>Student Information</h1>
              <div class="input-group">
                  <input type="search" placeholder="Search Data...">
                  <img src="\static\images\search.png" alt="">
@@ -794,35 +892,27 @@ thead th.active,tbody td.active {
 
          </section>
          <section class="table__body">
-            <table>
+             <table>
                 <thead>
                     <tr>
                         <th> Name <span class="icon-arrow">&UpArrow;</span></th>
-                        <th> Department <span class="icon-arrow">&UpArrow;</span></th>
-                        <th> Blood Group <span class="icon-arrow">&UpArrow;</span></th>
-                        <th> Research Interest <span class="icon-arrow">&UpArrow;</span></th>
-                        <th> Room No. <span class="icon-arrow">&UpArrow;</span></th>
-
-                        <th> Email <span class="icon-arrow">&UpArrow;</span></th>
-                        <th> Sex <span class="icon-arrow">&UpArrow;</span></th>
-                        <th> Role <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Travel Route <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Make a request <span class="icon-arrow">&UpArrow;</span></th>
                     </tr>
                 </thead>
                 <tbody>
-                   {% for f in faculties %}
-                   {% if f.role == "Faculty" %}
+                   {% for s in students %}
+                   {% if s.role == "Student" %}
                    <tr>
-                       <td> <img src="{{f.profile_pic.url}}" alt=""><a href="{% url 'portfolio' user_id=f.id %}">{{f.name}}</a></td>
-                       <td> {{f.department}} </td>
-                       <td> {{f.blood_group}} </td>
-
-                       <td> {{f.research_interest}} </td>
-                       <td> {{f.room_no}} </td>
-
-                       <td>{{f.user.email}}</td>
-                       <td>{{f.gender}}</td>
-                       <td>{{f.role}}</td>
-                   </tr>
+                       <td> <img src="{{s.profile_pic.url}}" alt=""><a href="{% url 'portfolio' user_id=s.id %}">{{s.name}}</a></td>
+                       <td>{{s.get_travel_route_display}}</td>
+                       <td>
+                            <form method="post" action="{% url 'send_notification' recipient_id=s.id %}">
+                                {% csrf_token %}<button class="btn btn-4 btn-sep icon-send" onclick="alert('Your ride request has been successfully sent! Please allow some time for the recipient to review and respond to your request. Thank you for using our ride-sharing service.')">Request ride!</button>
+                            </form>
+                        </td>
+                   
+                        </tr>
                    {% endif %}
                    {% endfor %}
 
